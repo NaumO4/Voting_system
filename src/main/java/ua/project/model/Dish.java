@@ -17,13 +17,24 @@ public class Dish extends NamedEntity {
     @NotNull
     private Integer price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @Column(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private Restaurant restaurant;
+    private Integer restaurantId;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "restaurant_id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @NotNull
+//    private Restaurant restaurant;
 
     public Dish() {
+    }
+
+    public Dish(Integer id, String name, Integer price, Integer restaurantId) {
+        super(id, name);
+        this.price = price;
+        this.restaurantId = restaurantId;
     }
 
     public Integer getPrice() {
@@ -34,11 +45,29 @@ public class Dish extends NamedEntity {
         this.price = price;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+//    public Restaurant getRestaurant() {
+//        return restaurant;
+//    }
+//
+//    public void setRestaurant(Restaurant restaurant) {
+//        this.restaurant = restaurant;
+//    }
+
+    public Integer getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurantId(Integer restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", restaurantID=" + restaurantId +
+                ", id=" + id +
+                '}';
     }
 }
