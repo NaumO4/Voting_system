@@ -1,10 +1,12 @@
 package ua.project.service.impl;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.project.RestaurantTestData;
 import ua.project.model.Dish;
 import ua.project.model.Restaurant;
+import ua.project.repository.JpaUtil;
 import ua.project.service.AbstractServiceTest;
 import ua.project.service.RestaurantService;
 
@@ -19,6 +21,16 @@ public class RestaurantServiceImplTest extends AbstractServiceTest {
 
     @Autowired
     private RestaurantService restaurantService;
+
+    @Autowired
+    protected JpaUtil jpaUtil;
+
+
+    @Before
+    public void setUp() throws Exception {
+        restaurantService.evictCache();
+        jpaUtil.clear2ndLevelHibernateCache();
+    }
 
     @Test
     public void save() throws Exception {

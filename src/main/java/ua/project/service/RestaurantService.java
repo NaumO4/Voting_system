@@ -25,4 +25,6 @@ public interface RestaurantService {
     void deleteMenu(int restaurantId);
 
     List<Dish> getMenu(int restaurantId);
+
+    void evictCache();
 }

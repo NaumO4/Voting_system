@@ -8,6 +8,11 @@ public class VoteCount {
     private Long count;
     private Restaurant restaurant;
 
+    public VoteCount(Long count, Restaurant restaurant) {
+        this.count = count;
+        this.restaurant = restaurant;
+    }
+
     public VoteCount(Integer id, Long count, Restaurant restaurant) {
         this.id = id;
         this.count = count;

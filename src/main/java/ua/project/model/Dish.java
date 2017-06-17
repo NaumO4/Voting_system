@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Dish extends NamedEntity {
 
     @Column(name = "price", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Integer price;
 

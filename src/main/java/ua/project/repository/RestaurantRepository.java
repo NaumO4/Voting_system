@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ua.project.model.Restaurant;
+import ua.project.model.VoteCount;
 
 import java.util.List;
 import java.util.Map;

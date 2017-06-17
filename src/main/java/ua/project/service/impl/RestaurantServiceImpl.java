@@ -1,6 +1,8 @@
 package ua.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -28,6 +30,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private DishRepository dishRepository;
 
     @Override
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     public Restaurant save(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
@@ -35,12 +38,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     public void delete(int id) {
         checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
     @Override
+    @Cacheable("restaurants")
     public List<Restaurant> getAll() {
         return restaurantRepository.findAll();
     }
@@ -72,5 +77,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<Dish> getMenu(int restaurantId) {
         return dishRepository.findAllByRestaurantId(restaurantId);
+    }
+
+    @CacheEvict(value = "restaurants", allEntries = true)
+    @Override
+    public void evictCache() {
+        // only for evict cache
     }
 }
